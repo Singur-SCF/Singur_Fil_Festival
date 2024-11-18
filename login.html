@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Singur Film Festival 3rd Year</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 16px;
+            margin: 10px 0;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to Singur Film Festival</h2>
+        <form id="loginForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            
+            <label for="pin">PIN Number</label>
+            <input type="password" id="pin" name="pin" placeholder="Enter your PIN" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        <p id="errorMessage" class="error-message"></p>
+    </div>
+
+    <script>
+        // Predefined users and their PINs
+        const users = {
+            "Sammo Dutta": "4565",
+            "Tushar Chatterjee": "1324",
+            "Deeptesh Mukherjee": "5676",
+            "Pushpal Bhattacharya": "7898",
+            "Arko Kar": "0978",
+            "Sourav Bag": "4759",
+            "Mourjo Sur": "8687",
+            "Mainak Ganguly": "1543",
+            "Milan Das": "7973",
+            "Sayan Das": "3449",
+            "Samim Ahamed": "1178",
+            "Raj Koley": "3376",
+            "Himesh Mondal": "7745",
+            "Sohini Chakraborty": "9973",
+            "Pratusha Sarkar": "0254",
+        };
+
+        // Get the form and error message elements
+        const loginForm = document.getElementById("loginForm");
+        const errorMessage = document.getElementById("errorMessage");
+
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from refreshing the page
+
+            const name = document.getElementById("name").value.trim();
+            const pin = document.getElementById("pin").value.trim();
+
+            // Check if name and PIN match
+            if (users[name] && users[name] === pin) {
+                // Save the user's name in local storage
+                localStorage.setItem("loggedInUser", name);
+
+                // Redirect to the To-Do list page (todo.html)
+                window.location.href = "index.html"; // Make sure todo.html exists in the same directory
+            } else {
+                // Show error message if the login fails
+                errorMessage.textContent = "Invalid name or PIN. Please try again.";
+            }
+        });
+    </script>
+</body>
+</html>
