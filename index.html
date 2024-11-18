@@ -3,146 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singur Film Festival 3rd Year</title>
+    <title>Singur Film Festival - Login & To-Do</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
         }
         .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: #4CAF50;
+            color: white;
             text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
         }
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 20px;
+        .header img {
+            width: 50px;
+            margin-bottom: 5px;
         }
-        h1 {
-            margin-bottom: 20px;
+
+        /* Login Section */
+        .login-section,
+        .todo-section {
+            padding: 20px;
         }
         .hidden {
             display: none;
         }
-        .login-section, .todo-section {
-            margin-bottom: 30px;
-        }
         label {
             font-size: 16px;
-            margin: 10px 0;
             display: block;
+            margin-bottom: 8px;
         }
         input {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-size: 14px;
         }
         button {
             width: 100%;
             padding: 12px;
-            background-color: #4CAF50;
+            background: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
+            transition: 0.3s;
         }
         button:hover {
-            background-color: #45a049;
+            background: #45a049;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* To-Do Section */
+        .todo-section h2 {
+            color: #333;
         }
         ul {
             list-style-type: none;
             padding: 0;
+            margin: 20px 0;
         }
         .task-item {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin: 5px 0;
-            border-radius: 4px;
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid #ddd;
         }
         .task-item.completed {
             text-decoration: line-through;
             color: #aaa;
         }
         .task-item button {
-            background-color: #4CAF50;
+            background: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 5px;
             padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
         }
         .task-item button:hover {
-            background-color: #45a049;
+            background: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Festival Logo -->
-        <img src="festival-logo.png" alt="Festival Logo" class="logo">
-        
-        <h1>🎥 Singur Film Festival 3rd Year 🎉</h1>
+        <!-- Header -->
+        <div class="header">
+            <img src="festival-logo.png" alt="Festival Logo">
+            <p>Singur Film Festival 3rd Year</p>
+        </div>
 
         <!-- Login Section -->
         <div id="loginSection" class="login-section">
             <h2>Login</h2>
             <label for="name">Name</label>
             <input type="text" id="name" placeholder="Enter your name">
-            
             <label for="pin">PIN Number</label>
             <input type="password" id="pin" placeholder="Enter your PIN">
-            
             <button id="loginBtn">Login</button>
-            <p id="errorMessage" style="color: red; font-size: 14px;"></p>
+            <p id="errorMessage" class="error-message"></p>
         </div>
 
         <!-- To-Do Section -->
         <div id="todoSection" class="todo-section hidden">
+            <h2>Your To-Do List</h2>
             <p id="welcomeMessage"></p>
             <ul id="taskList">
-                <!-- Predefined Sample Tasks -->
-                 <li class="task-item">
-                Making Decoration 
-                <button class="mark-complete-btn">Mark as Complete</button>
-            </li>
-            <li class="task-item">
-                Coordinate with Guests 
-                <button class="mark-complete-btn">Mark as Complete</button>
-            </li>
-            <li class="task-item">
-                Manage Guests Food  
-                <button class="mark-complete-btn">Mark as Complete</button>
-            </li>
-            <li class="task-item">
-                Manage Crouds  
-                <button class="mark-complete-btn">Mark as Complete</button>
-            </li>
-            <li class="task-item">
-                Manage Screening 
-                <button class="mark-complete-btn">Mark as Complete</button>
-            </li>
-            <li class="task-item">
-                Manage Water Supply  
-                <button class="mark-complete-btn">Mark as Complete</button>
-            </li>
-            <li class="task-item">
-                Managing Selfie Zone  Croud 
-                <button class="mark-complete-btn">Mark as Complete</button>
-            </li>
+                <li class="task-item">
+                    Finalize Festival Schedule
+                    <button class="mark-complete-btn">Mark as Complete</button>
+                </li>
+                <li class="task-item">
+                    Coordinate with Sponsors
+                    <button class="mark-complete-btn">Mark as Complete</button>
+                </li>
             </ul>
         </div>
     </div>
@@ -164,7 +168,7 @@
             "Raj Koley": "3376",
             "Himesh Mondal": "7745",
             "Sohini Chakraborty": "9973",
-            "Pratusha Sarkar": "0254"
+            "Pratusha Sarkar": "0254",
         };
 
         // Elements
