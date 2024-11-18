@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singur Film Festival 3rd Year - To-Do List</title>
+    <title>Singur Film Festival 3rd Year</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
         }
-        .todo-container {
+        .container {
             max-width: 600px;
             margin: 50px auto;
             background-color: white;
@@ -26,17 +26,42 @@
             margin-bottom: 20px;
         }
         h1 {
-            text-align: center;
             margin-bottom: 20px;
         }
-        .welcome-message {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 18px;
-            color: #555;
+        .hidden {
+            display: none;
         }
-        .task-list {
-            margin-top: 20px;
+        .login-section, .todo-section {
+            margin-bottom: 30px;
+        }
+        label {
+            font-size: 16px;
+            margin: 10px 0;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
         }
         .task-item {
             background-color: #f9f9f9;
@@ -66,15 +91,31 @@
     </style>
 </head>
 <body>
-    <div class="todo-container">
+    <div class="container">
         <!-- Festival Logo -->
-        <img src="C:\Users\Tushar Chatterjee\Desktop\Vs Code Project\SCF TO_DO_WEBSITE\logo\scf logo.jpg" alt="Festival Logo" class="logo">
+        <img src="festival-logo.png" alt="Festival Logo" class="logo">
         
         <h1>🎥 Singur Film Festival 3rd Year 🎉</h1>
-        <div class="welcome-message" id="welcomeMessage"></div>
-        <ul id="task-list">
-            <!-- Sample Tasks -->
-            <li class="task-item">
+
+        <!-- Login Section -->
+        <div id="loginSection" class="login-section">
+            <h2>Login</h2>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+            
+            <label for="pin">PIN Number</label>
+            <input type="password" id="pin" placeholder="Enter your PIN">
+            
+            <button id="loginBtn">Login</button>
+            <p id="errorMessage" style="color: red; font-size: 14px;"></p>
+        </div>
+
+        <!-- To-Do Section -->
+        <div id="todoSection" class="todo-section hidden">
+            <p id="welcomeMessage"></p>
+            <ul id="taskList">
+                <!-- Predefined Sample Tasks -->
+                 <li class="task-item">
                 Making Decoration 
                 <button class="mark-complete-btn">Mark as Complete</button>
             </li>
@@ -102,25 +143,56 @@
                 Managing Selfie Zone  Croud 
                 <button class="mark-complete-btn">Mark as Complete</button>
             </li>
-        </ul>
+            </ul>
+        </div>
     </div>
 
     <script>
-        // Show the logged-in user's name
-        const loggedInUser = localStorage.getItem("loggedInUser");
+        // Predefined users and their PINs
+        const users = {
+            "Sammo Dutta": "4565",
+            "Tushar Chatterjee": "1324",
+            "Deeptesh Mukherjee": "5676",
+            "Pushpal Bhattacharya": "7898",
+            "Arko Kar": "0978",
+            "Sourav Bag": "4759",
+            "Mourjo Sur": "8687",
+            "Mainak Ganguly": "1543",
+            "Milan Das": "7973",
+            "Sayan Das": "3449",
+            "Samim Ahamed": "1178",
+            "Raj Koley": "3376",
+            "Himesh Mondal": "7745",
+            "Sohini Chakraborty": "9973",
+            "Pratusha Sarkar": "0254"
+        };
+
+        // Elements
+        const loginSection = document.getElementById("loginSection");
+        const todoSection = document.getElementById("todoSection");
+        const loginBtn = document.getElementById("loginBtn");
+        const errorMessage = document.getElementById("errorMessage");
         const welcomeMessage = document.getElementById("welcomeMessage");
+        const nameInput = document.getElementById("name");
+        const pinInput = document.getElementById("pin");
 
-        if (loggedInUser) {
-            welcomeMessage.textContent = `Welcome, ${loggedInUser}! Here are your tasks:`;
-        } else {
-            welcomeMessage.textContent = "Welcome! Please log in to view your tasks.";
-            <a href="login.html">Go to Login Page</a>
+        // Login Functionality
+        loginBtn.addEventListener("click", function () {
+            const name = nameInput.value;
+            const pin = pinInput.value;
 
-        }
+            if (users[name] && users[name] === pin) {
+                // Show the To-Do Section
+                loginSection.classList.add("hidden");
+                todoSection.classList.remove("hidden");
+                welcomeMessage.textContent = `Welcome, ${name}! Here are your tasks:`;
+            } else {
+                errorMessage.textContent = "Invalid name or PIN. Please try again.";
+            }
+        });
 
-        // Add "Mark as Complete" functionality
-        const completeButtons = document.querySelectorAll(".mark-complete-btn");
-        completeButtons.forEach(button => {
+        // Mark as Complete Functionality
+        document.querySelectorAll(".mark-complete-btn").forEach(button => {
             button.addEventListener("click", function () {
                 const taskItem = button.parentElement;
                 taskItem.classList.toggle("completed");
